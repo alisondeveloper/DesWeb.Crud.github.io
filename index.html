@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<!-- Referencias do CRUD = "https://www.freecodecamp.org/news/learn-crud-operations-in-javascript-by-building-todo-app/"
+Referencia do Grid = "https://www.youtube.com/watch?v=705XCEruZFs&t=323s" -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Flashcard</title>
+  </head>
+
+  <style>
+    * {
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+    
+    body {
+      background-color: rgb(229, 229, 229);
+    }
+
+    .poppins-regular {
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .poppins-medium {
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    .center {
+      display: flex;
+      justify-content: center;
+      width: auto;s
+      
+    }
+
+    .db {
+      border-style: solid;
+    }
+
+    #explicacao {
+      padding-left: 5%;
+  padding-right: 5%;
+  min-padding-left: 5%;
+  max-padding-left: 50%;
+  min-padding-right: 5%;
+  max-padding-right: 50%;
+  font-weight:300;
+    }
+    
+    .basic-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(12, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      margin-left: 3%;
+      margin-right: 3%;
+    }
+
+    textarea {
+      width: 100%;
+  height: 70px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #8c8c8c;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+    }
+    
+    #unidadefc {
+      
+      margin-top: 20px;
+      text-align: center;
+      justify-content: center;
+      padding: 6%;
+     
+      position: relative;
+      padding-bottom: 30px;
+      border-radius: 10px;
+      background-color: white;
+      border: 4px solid #8c8c8c;
+  
+    }
+    
+    .card {
+    position: relative;
+    overflow: hidden;
+}
+    
+    .hidden-text {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0%;
+    background-color: rgba(255,255,255,0.9);
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+    .card:hover .hidden-text {
+        display: block;
+    }
+
+    i {
+      cursor: pointer;
+    }
+    
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .icon:hover{
+      fill: red;
+    }
+    
+    .options {
+      position: absolute;
+      bottom: 0;
+      left: 40%;
+      display: flex;
+    }
+    
+    .
+  </style>
+
+  <body>
+    <div class="center" style="flex-direction: column">
+    <h1 style="font-weight: 500; text-align: center;">SISTEMA DE FLASHCARDS</h1><p id="explicacao">Flashcards são pequenos cartões que servem para testar sua memória. <br/>Explicando de forma simples: de um lado, eles têm perguntas, e do outro, as respostas. <br/>É possível variar também, com tópicos e palavras-chave ou termos e definições.</p><br /></div>
+    <div class="center">
+      
+      <form id="form">
+        <label>Front</label>
+        <br />
+        <textarea name="front" id="inputfront" cols="30" rows="3"></textarea>
+        <br />
+
+        <label>Back</label>
+        <br />
+        <textarea name="back" id="inputback" cols="30" rows="10"></textarea>
+        <br />
+
+        <button type="submit">Adicionar</button>
+      </form>
+    </div>
+
+    <div id="postsfc" class="basic-grid">
+      <div id="unidadefc">
+        <div class="card">
+        <p>Qual a formula do delta?</p>
+        <div class="hidden-text">
+          <p style="font-weight: bold;">b^2-4*a*c</p>
+        </div>
+        </div>
+        <span class="options">
+          <i onclick="editPost(this)" ><svg class="icon"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/></svg></i>
+          <i onclick="deletePost(this)" ><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/></svg></i>
+        </span>
+      </div>
+      
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  let form = document.getElementById("form");
+  let inputfront = document.getElementById("inputfront");
+  let inputback = document.getElementById("inputback");
+  let postsfc = document.getElementById("postsfc");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log("button clicked");
+    formValidation();
+  });
+
+  let formValidation = () => {
+    if (inputfront.value === "" || inputback.value === "") {
+      console.log("failure");
+    } else {
+      console.log("successs");
+      acceptData();
+    }
+  };
+
+  //DATA
+  let data = {};
+
+  let acceptData = () => {
+    data["frontText"] = inputfront.value;
+    data["backText"] = inputback.value;
+    console.log(data);
+    createPost();
+  };
+
+  let createPost = () => {
+    postsfc.innerHTML += `
+    
+    <div id="unidadefc">
+        <div class="card">
+        <p>${data.frontText}</p>
+        <div class="hidden-text">
+          <p style="font-weight: bold;">${data.backText}</p>
+        </div>
+        </div>
+        <span class="options">
+          <i onclick="editPost(this)" ><svg class="icon"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/></svg></i>
+          <i onclick="deletePost(this)" ><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/></svg></i>
+        </span>
+      </div>
+    
+    `;
+    inputfront.value = "";
+    inputback.value = "";
+  };
+  
+  let deletePost = (e) => {
+    e.parentElement.parentElement.remove();
+  }
+    
+  let editPost = (e) => {
+    inputfront.value = e.parentElement.previousElementSibling.innerHTML;
+    e.parentElement.parentElement.remove();
+    
+    inputback.value = e.parentElement.previousElementSibling.innerHTML;
+    e.parentElement.parentElement.remove();
+  };
+</script>

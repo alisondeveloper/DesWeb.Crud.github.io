@@ -18,6 +18,4 @@ Esta é uma aplicação web simples de CRUD (Create, Read, Update, Delete) para 
 ## Referências
 
 - CRUD: [Learn CRUD Operations in JavaScript by Building ToDo App](https://www.freecodecamp.org/news/learn-crud-operations-in-javascript-by-building-todo-app/)
-- Grid Layout: [YouTube Tutorial](https://www.youtube.com/watch?v=705XCEruZFs&t=323s)
-
-
+- Grid Layout: [The Joy of CSS Grid - Build 3 Beautifully Simple Responsive Layouts](https://www.youtube.com/watch?v=705XCEruZFs&t=323s)
